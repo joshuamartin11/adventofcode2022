@@ -1,6 +1,3 @@
-from pyparsing import Or
-
-
 with open('D4/input.txt') as f:
     lines = f.readlines()
 

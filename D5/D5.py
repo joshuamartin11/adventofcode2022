@@ -1,4 +1,7 @@
-with open('D5/input.txt') as f:
+import time
+t0= time.time()
+
+with open('D5/aoc_2022_day05_large_input.txt') as f:
     lines = f.readlines()
 
 #Part 1
@@ -33,6 +36,9 @@ topChars = []
 for stack in stacks:
     topChars.append(stack[-1])
 
+t1 = time.time() - t0
+print("Time elapsed: ", t1) # CPU seconds elapsed (floating point)
+
 print(''.join(topChars))
 
 #Part 2
@@ -60,5 +66,6 @@ topChars = []
 for stack in stacks:
     topChars.append(stack[-1])
 
-
+t1 = time.time() - t0
+print("Time elapsed: ", t1) # CPU seconds elapsed (floating point)
 print(''.join(topChars))
