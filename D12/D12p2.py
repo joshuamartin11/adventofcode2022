@@ -9,42 +9,46 @@ def findNeighbours(n, board):
 with open('D12/input.txt') as f:
     lines = f.readlines()
 
+starts = []
+
 for i, line in enumerate(lines):
     for j, c in enumerate(line):
-        if c == "S":
-            start = (i,j)
+        if c == "S" or c == "a":
+            starts.append((i,j))
 
 # start = (20,0)
 
-queue = []
-explored = []
-queue.append([start])
-explored.append(start)
+lengths = []
 
-while len(queue) != 0:
-    path = queue.pop(0)
+for start in starts:
 
-    node = path[-1]
-    if lines[node[0]][node[1]] == "E":
-        print(len(path) - 1)
-        # for p in path:
-        #     print(lines[p[0]][p[1]])
-        print(path)
-        break
-    for neighbour in findNeighbours(node,lines):
-        if neighbour not in explored:
-            explored.append(neighbour)
-            newPath = list(path)
-            newPath.append(neighbour)
-            queue.append(newPath)
+    queue = []
+    explored = []
+    queue.append([start])
+    explored.append(start)
 
+    while len(queue) != 0:
+        path = queue.pop(0)
 
-for p in path:
-    new = list(lines[p[0]])
+        node = path[-1]
+        if lines[node[0]][node[1]] == "E":
+            lengths.append(len(path)-1)
+            break
+        for neighbour in findNeighbours(node,lines):
+            if neighbour not in explored:
+                explored.append(neighbour)
+                newPath = list(path)
+                newPath.append(neighbour)
+                queue.append(newPath)
 
-    new[p[1]] = "#"
+print(min(lengths))
 
-    lines[p[0]] = ''.join(new)
+# for p in path:
+#     new = list(lines[p[0]])
 
-for line in lines:
-    print(line.strip())
+#     new[p[1]] = "#"
+
+#     lines[p[0]] = ''.join(new)
+
+# for line in lines:
+#     print(line.strip())
